@@ -24,6 +24,12 @@ describe('ParseBoolPipe', () => {
         return expect(target.transform('123abc', {} as ArgumentMetadata)).to.be
           .rejected;
       });
+
+      it('should not throw an error if the value is undefined/null and optional is true', async () => {
+        const target = new ParseBoolPipe({ optional: true });
+        const value = await target.transform(undefined, {} as ArgumentMetadata);
+        expect(value).to.equal(undefined);
+      });
     });
   });
 });

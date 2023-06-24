@@ -42,6 +42,12 @@ describe('ParseIntPipe', () => {
           target.transform('0xFF', {} as ArgumentMetadata),
         ).to.be.rejectedWith(CustomTestError);
       });
+
+      it('should not throw an error if the value is undefined/null and optional is true', async () => {
+        const target = new ParseIntPipe({ optional: true });
+        const value = await target.transform(undefined, {} as ArgumentMetadata);
+        expect(value).to.equal(undefined);
+      });
     });
   });
 });
